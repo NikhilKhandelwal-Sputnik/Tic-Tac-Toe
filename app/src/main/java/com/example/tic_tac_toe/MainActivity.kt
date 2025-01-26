@@ -5,6 +5,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -40,12 +41,7 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             TicTacToeTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Android",
-                        modifier = Modifier.padding(innerPadding)
-                    )
-                }
+                TicTacToePreview()
             }
         }
     }
@@ -128,8 +124,9 @@ fun Cell(value: String, onClick: () -> Unit) {
     Box(
         modifier = Modifier
             .size(100.dp)
-            .background(Color.LightGray)
-            .clickable { onClick() },
+            .background(Color.Yellow)
+            .clickable { onClick() }
+            .border(1.dp, Color.Black),
         contentAlignment = Alignment.Center
     ) {
         Text(
@@ -167,18 +164,12 @@ fun checkGameState(board: List<String>): GameState {
 }
 
 
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
+
 
 @Preview(showBackground = true)
 @Composable
-fun GreetingPreview() {
+fun TicTacToePreview() {
     TicTacToeTheme {
-        Greeting("Android")
+        TicTacToe()
     }
 }
